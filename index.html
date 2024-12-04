@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geolocation API Example</title>
+    <title>Geolocation API with High Accuracy</title>
 </head>
 <body>
-    <h1>Geolocation API Example</h1>
+    <h1>Geolocation API with High Accuracy</h1>
     <p>ตำแหน่งปัจจุบันของคุณ:</p>
     <p id="location">กำลังโหลด...</p>
 
     <script>
         if (navigator.geolocation) {
+            // ตั้งค่าตัวเลือกเพื่อเพิ่มความแม่นยำ
+            var options = {
+                enableHighAccuracy: true,  // บังคับให้ใช้ GPS หรือเทคโนโลยีที่แม่นยำที่สุด
+                timeout: 5000,  // ตั้งเวลาให้หาตำแหน่งไม่เกิน 5 วินาที
+                maximumAge: 0   // ไม่ใช้ตำแหน่งที่เก็บไว้นานเกิน 0 วินาที
+            };
+
             navigator.geolocation.getCurrentPosition(function(position) {
                 // เมื่อได้รับตำแหน่ง
                 var latitude = position.coords.latitude;   // ละติจูด
                 var longitude = position.coords.longitude; // ลองจิจูด
+                var accuracy = position.coords.accuracy;   // ความแม่นยำ (เมตร)
+                
                 // แสดงผลตำแหน่ง
                 document.getElementById('location').innerHTML = 
                     "ละติจูด: " + latitude + "<br>" + 
-                    "ลองจิจูด: " + longitude;
+                    "ลองจิจูด: " + longitude + "<br>" +
+                    "ความแม่นยำ: " + accuracy + " เมตร";
             }, function(error) {
                 // กรณีมีข้อผิดพลาด (เช่น ไม่อนุญาตให้ใช้ตำแหน่ง)
                 switch (error.code) {
@@ -36,7 +46,7 @@
                         document.getElementById('location').innerHTML = "เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ";
                         break;
                 }
-            });
+            }, options);
         } else {
             // หากเบราว์เซอร์ไม่รองรับ Geolocation API
             document.getElementById('location').innerHTML = "เบราว์เซอร์นี้ไม่รองรับ Geolocation API";
