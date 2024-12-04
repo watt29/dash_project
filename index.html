@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation API Example</title>
+</head>
+<body>
+    <h1>Geolocation API Example</h1>
+    <p>ตำแหน่งปัจจุบันของคุณ:</p>
+    <p id="location">กำลังโหลด...</p>
+
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // เมื่อได้รับตำแหน่ง
+                var latitude = position.coords.latitude;   // ละติจูด
+                var longitude = position.coords.longitude; // ลองจิจูด
+                // แสดงผลตำแหน่ง
+                document.getElementById('location').innerHTML = 
+                    "ละติจูด: " + latitude + "<br>" + 
+                    "ลองจิจูด: " + longitude;
+            }, function(error) {
+                // กรณีมีข้อผิดพลาด (เช่น ไม่อนุญาตให้ใช้ตำแหน่ง)
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        document.getElementById('location').innerHTML = "ผู้ใช้ไม่อนุญาตให้เข้าถึงตำแหน่ง";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        document.getElementById('location').innerHTML = "ไม่สามารถค้นหาตำแหน่งได้";
+                        break;
+                    case error.TIMEOUT:
+                        document.getElementById('location').innerHTML = "การค้นหาตำแหน่งใช้เวลานานเกินไป";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        document.getElementById('location').innerHTML = "เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ";
+                        break;
+                }
+            });
+        } else {
+            // หากเบราว์เซอร์ไม่รองรับ Geolocation API
+            document.getElementById('location').innerHTML = "เบราว์เซอร์นี้ไม่รองรับ Geolocation API";
+        }
+    </script>
+</body>
+</html>
