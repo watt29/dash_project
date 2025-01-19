@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary List for Kids</title>
+    <style>
+        /* กำหนดการแสดงผลของทุกอุปกรณ์ */
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffeb99;
+            /* สีพื้นหลังที่สดใส */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            flex-direction: column;
+            overflow-y: auto;
+            /* ทำให้หน้าจอสามารถเลื่อน (scrollable) ได้ */
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            /* เพิ่มความกว้างสูงสุด */
+            margin-top: 10px;
+            overflow-y: auto;
+            /* ทำให้พื้นที่นี้เลื่อนเมื่อเนื้อหามาก */
+            max-height: 80vh;
+            /* กำหนดความสูงสูงสุดของพื้นที่นี้ */
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff5733;
+            /* สีตัวอักษรหัวข้อ */
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .vocabulary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .vocabulary-item {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #4a4a4a;
+        }
+
+        .vocabulary-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .vocabulary-item h3 {
+            font-size: 1.7rem;
+            color: #ff5733;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .vocabulary-item p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        /* ปรับขนาดฟอนต์ให้เหมาะสมกับเด็ก ๆ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .vocabulary-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .vocabulary-item p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ปรับขนาดฟอนต์สำหรับมือถือ */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .vocabulary-item h3 {
+                font-size: 1.3rem;
+            }
+
+            .vocabulary-item p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Vocabulary List for Kids</h1>
+        <ul class="vocabulary-list" id="vocabulary-list">
+            <!-- Data from Firebase will be shown here -->
+        </ul>
+    </div>
+
+    <script type="module">
+        // Import necessary Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyY7wg4CJvlzq-V04n-lMWxBiLkL9E374",
+            authDomain: "natural-aspect-355112.firebaseapp.com",
+            databaseURL: "https://natural-aspect-355112-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "natural-aspect-355112",
+            storageBucket: "natural-aspect-355112.firebasestorage.app",
+            messagingSenderId: "941925591339",
+            appId: "1:941925591339:web:366d6757801abb11fbfd6e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const vocabRef = ref(database, 'vocabulary');
+
+        // Fetch data from Firebase Realtime Database
+        get(vocabRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const vocabData = snapshot.val();
+                const vocabListElement = document.getElementById("vocabulary-list");
+
+                // Loop through the data and create HTML for each word
+                for (const word in vocabData) {
+                    const wordData = vocabData[word];
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("vocabulary-item");
+
+                    // Display only word and meaning
+                    listItem.innerHTML = `
+                    <h3>${word}</h3>
+                    <p><strong>Meaning:</strong> ${wordData.meaning}</p>
+                `;
+                    vocabListElement.appendChild(listItem);
+                }
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error("Error fetching data: ", error);
+        });
+    </script>
+
+</body>
+
+</html>
