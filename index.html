@@ -172,13 +172,14 @@
             // Empty the list first before displaying new data
             vocabListElement.innerHTML = '';
 
-            vocabData.forEach((item) => {
+            // Loop through vocabData and display with index
+            vocabData.forEach((item, index) => {
                 const listItem = document.createElement("li");
                 listItem.classList.add("vocabulary-item");
                 listItem.innerHTML = `
-                <h3>${item.word}</h3>
-                <p><strong>Meaning:</strong> ${item.meaning}</p>
-            `;
+                    <h3>${index + 1}. ${item.word}</h3>
+                    <p><strong>Meaning:</strong> ${item.meaning}</p>
+                `;
                 vocabListElement.appendChild(listItem);
             });
         }
