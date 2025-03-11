@@ -4,184 +4,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocabulary List for Kids</title>
+    <title>แบบทดสอบภาษาอังกฤษ</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f8e9;
             margin: 0;
             padding: 0;
-            background-color: #ffeb99;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 900px;
-            margin-top: 10px;
-            overflow-y: auto;
-            max-height: 80vh;
-            text-align: center;
         }
 
         h1 {
-            font-size: 2rem;
-            color: #ff5733;
-            margin-bottom: 20px;
-            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background-color: #4caf50;
+            color: white;
+            margin: 0;
         }
 
-        .vocabulary-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 0;
-            list-style: none;
-            overflow-y: auto;
-        }
-
-        .vocabulary-item {
-            background-color: #f2f2f2;
-            padding: 15px;
-            border-radius: 12px;
+        .quiz-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: #4a4a4a;
         }
 
-        .vocabulary-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
         }
 
-        .vocabulary-item h3 {
-            font-size: 1.7rem;
-            color: #ff5733;
-            margin-bottom: 10px;
+        .question p {
+            font-size: 20px;
             font-weight: bold;
+            color: #4caf50;
         }
 
-        .vocabulary-item p {
-            font-size: 1.2rem;
-            margin: 5px 0;
+        .options label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+            background-color: #e8f5e9;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .vocabulary-item h3 {
-                font-size: 1.5rem;
-            }
-
-            .vocabulary-item p {
-                font-size: 1.1rem;
-            }
+        .options label:hover {
+            background-color: #dcedc8;
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
 
-            .vocabulary-item h3 {
-                font-size: 1.3rem;
-            }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-            .vocabulary-item p {
-                font-size: 1rem;
-            }
+        .submit-btn:hover {
+            background-color: #388e3c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Vocabulary List for Kids</h1>
-        <p id="total-count" style="font-size: 1.2rem; font-weight: bold;">Loading...</p>
-        <ul class="vocabulary-list" id="vocabulary-list">
-            <!-- Data from Firebase will be shown here -->
-        </ul>
+    <h1>แบบทดสอบภาษาอังกฤษ</h1>
+
+    <div class="quiz-container">
+        <form id="quizForm">
+            <!-- Question Template (You can copy this and add your own questions) -->
+            <div class="question" id="question1">
+                <p>1. Which one is a fruit?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="A"> A) Carrot</label>
+                    <label><input type="radio" name="q1" value="B"> B) Apple</label>
+                    <label><input type="radio" name="q1" value="C"> C) Potato</label>
+                    <label><input type="radio" name="q1" value="D"> D) Onion</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question2">
+                <p>2. Which one is a vegetable?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="A"> A) Banana</label>
+                    <label><input type="radio" name="q2" value="B"> B) Apple</label>
+                    <label><input type="radio" name="q2" value="C"> C) Carrot</label>
+                    <label><input type="radio" name="q2" value="D"> D) Pear</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question3">
+                <p>3. Which is the largest planet in our solar system?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="A"> A) Earth</label>
+                    <label><input type="radio" name="q3" value="B"> B) Mars</label>
+                    <label><input type="radio" name="q3" value="C"> C) Jupiter</label>
+                    <label><input type="radio" name="q3" value="D"> D) Saturn</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question4">
+                <p>4. Who wrote "Romeo and Juliet"?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="A"> A) William Shakespeare</label>
+                    <label><input type="radio" name="q4" value="B"> B) Charles Dickens</label>
+                    <label><input type="radio" name="q4" value="C"> C) J.K. Rowling</label>
+                    <label><input type="radio" name="q4" value="D"> D) Mark Twain</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question5">
+                <p>5. What is the capital city of France?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="A"> A) Rome</label>
+                    <label><input type="radio" name="q5" value="B"> B) Paris</label>
+                    <label><input type="radio" name="q5" value="C"> C) Berlin</label>
+                    <label><input type="radio" name="q5" value="D"> D) Madrid</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question6">
+                <p>6. What is the chemical symbol for water?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="A"> A) O₂</label>
+                    <label><input type="radio" name="q6" value="B"> B) CO₂</label>
+                    <label><input type="radio" name="q6" value="C"> C) H₂O</label>
+                    <label><input type="radio" name="q6" value="D"> D) CH₄</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question7">
+                <p>7. What is the capital of the United States?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="A"> A) Washington, D.C.</label>
+                    <label><input type="radio" name="q7" value="B"> B) New York</label>
+                    <label><input type="radio" name="q7" value="C"> C) Los Angeles</label>
+                    <label><input type="radio" name="q7" value="D"> D) Chicago</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question8">
+                <p>8. In what year did World War II end?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="A"> A) 1918</label>
+                    <label><input type="radio" name="q8" value="B"> B) 1939</label>
+                    <label><input type="radio" name="q8" value="C"> C) 1945</label>
+                    <label><input type="radio" name="q8" value="D"> D) 1950</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question9">
+                <p>9. Who developed the theory of relativity?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="A"> A) Isaac Newton</label>
+                    <label><input type="radio" name="q9" value="B"> B) Nikola Tesla</label>
+                    <label><input type="radio" name="q9" value="C"> C) Albert Einstein</label>
+                    <label><input type="radio" name="q9" value="D"> D) Galileo Galilei</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question10">
+                <p>10. Which programming language is known for its simplicity?</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="A"> A) Java</label>
+                    <label><input type="radio" name="q10" value="B"> B) C++</label>
+                    <label><input type="radio" name="q10" value="C"> C) Python</label>
+                    <label><input type="radio" name="q10" value="D"> D) JavaScript</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question11">
+                <p>11. Who painted the Mona Lisa?</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="A"> A) Leonardo da Vinci</label>
+                    <label><input type="radio" name="q11" value="B"> B) Vincent van Gogh</label>
+                    <label><input type="radio" name="q11" value="C"> C) Pablo Picasso</label>
+                    <label><input type="radio" name="q11" value="D"> D) Claude Monet</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question12">
+                <p>12. Who composed the "Fur Elise"?</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="A"> A) Wolfgang Amadeus Mozart</label>
+                    <label><input type="radio" name="q12" value="B"> B) Johann Sebastian Bach</label>
+                    <label><input type="radio" name="q12" value="C"> C) Ludwig van Beethoven</label>
+                    <label><input type="radio" name="q12" value="D"> D) Franz Schubert</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question13">
+                <p>13. What is the largest desert in the world?</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="A"> A) Kalahari Desert</label>
+                    <label><input type="radio" name="q13" value="B"> B) Sonoran Desert</label>
+                    <label><input type="radio" name="q13" value="C"> C) Sahara Desert</label>
+                    <label><input type="radio" name="q13" value="D"> D) Atacama Desert</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question14">
+                <p>14. What is the longest river in the world?</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="A"> A) Amazon River</label>
+                    <label><input type="radio" name="q14" value="B"> B) Nile River</label>
+                    <label><input type="radio" name="q14" value="C"> C) Yangtze River</label>
+                    <label><input type="radio" name="q14" value="D"> D) Mississippi River</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question15">
+                <p>15. What is the tallest mountain in the world?</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="A"> A) Mount Everest</label>
+                    <label><input type="radio" name="q15" value="B"> B) K2</label>
+                    <label><input type="radio" name="q15" value="C"> C) Kilimanjaro</label>
+                    <label><input type="radio" name="q15" value="D"> D) Mount McKinley</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question16">
+                <p>16. Who is the founder of Tesla?</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="A"> A) Steve Jobs</label>
+                    <label><input type="radio" name="q16" value="B"> B) Bill Gates</label>
+                    <label><input type="radio" name="q16" value="C"> C) Elon Musk</label>
+                    <label><input type="radio" name="q16" value="D"> D) Larry Page</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question17">
+                <p>17. Who painted the "Last Supper"?</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="A"> A) Raphael</label>
+                    <label><input type="radio" name="q17" value="B"> B) Michelangelo</label>
+                    <label><input type="radio" name="q17" value="C"> C) Leonardo da Vinci</label>
+                    <label><input type="radio" name="q17" value="D"> D) Titian</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question18">
+                <p>18. In which year was the United States Declaration of Independence signed?</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="A"> A) 1776</label>
+                    <label><input type="radio" name="q18" value="B"> B) 1787</label>
+                    <label><input type="radio" name="q18" value="C"> C) 1801</label>
+                    <label><input type="radio" name="q18" value="D"> D) 1865</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question19">
+                <p>19. What year did the Titanic sink?</p>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="A"> A) 1912</label>
+                    <label><input type="radio" name="q19" value="B"> B) 1898</label>
+                    <label><input type="radio" name="q19" value="C"> C) 1923</label>
+                    <label><input type="radio" name="q19" value="D"> D) 1945</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question20">
+                <p>20. Where is Silicon Valley located?</p>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="A"> A) New York</label>
+                    <label><input type="radio" name="q20" value="B"> B) London</label>
+                    <label><input type="radio" name="q20" value="C"> C) Paris</label>
+                    <label><input type="radio" name="q20" value="D"> D) California</label>
+                </div>
+            </div>
+            <div class="question" id="question21">
+                <p>21. Which element has the chemical symbol 'O'?</p>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="A"> A) Oxygen</label>
+                    <label><input type="radio" name="q21" value="B"> B) Ozone</label>
+                    <label><input type="radio" name="q21" value="C"> C) Osmium</label>
+                    <label><input type="radio" name="q21" value="D"> D) Obsidian</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question22">
+                <p>22. What is the main ingredient in guacamole?</p>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="A"> A) Avocado</label>
+                    <label><input type="radio" name="q22" value="B"> B) Tomato</label>
+                    <label><input type="radio" name="q22" value="C"> C) Onion</label>
+                    <label><input type="radio" name="q22" value="D"> D) Lime</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question23">
+                <p>23. What is the currency of Japan?</p>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="A"> A) Yen</label>
+                    <label><input type="radio" name="q23" value="B"> B) Dollar</label>
+                    <label><input type="radio" name="q23" value="C"> C) Euro</label>
+                    <label><input type="radio" name="q23" value="D"> D) Pound</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question24">
+                <p>24. Who is the author of the "Harry Potter" series?</p>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="A"> A) J.R.R. Tolkien</label>
+                    <label><input type="radio" name="q24" value="B"> B) J.K. Rowling</label>
+                    <label><input type="radio" name="q24" value="C"> C) George R.R. Martin</label>
+                    <label><input type="radio" name="q24" value="D"> D) Suzanne Collins</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question25">
+                <p>25. What is the main language spoken in Brazil?</p>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="A"> A) Spanish</label>
+                    <label><input type="radio" name="q25" value="B"> B) Portuguese</label>
+                    <label><input type="radio" name="q25" value="C"> C) French</label>
+                    <label><input type="radio" name="q25" value="D"> D) English</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question26">
+                <p>26. Which country is known for the Great Wall?</p>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="A"> A) India</label>
+                    <label><input type="radio" name="q26" value="B"> B) China</label>
+                    <label><input type="radio" name="q26" value="C"> C) Russia</label>
+                    <label><input type="radio" name="q26" value="D"> D) Egypt</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question27">
+                <p>27. Who invented the telephone?</p>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="A"> A) Alexander Graham Bell</label>
+                    <label><input type="radio" name="q27" value="B"> B) Thomas Edison</label>
+                    <label><input type="radio" name="q27" value="C"> C) Nikola Tesla</label>
+                    <label><input type="radio" name="q27" value="D"> D) Albert Einstein</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question28">
+                <p>28. In which year did the first moon landing happen?</p>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="A"> A) 1965</label>
+                    <label><input type="radio" name="q28" value="B"> B) 1969</label>
+                    <label><input type="radio" name="q28" value="C"> C) 1972</label>
+                    <label><input type="radio" name="q28" value="D"> D) 1980</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question29">
+                <p>29. What is the main component of the sun?</p>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="A"> A) Oxygen</label>
+                    <label><input type="radio" name="q29" value="B"> B) Hydrogen</label>
+                    <label><input type="radio" name="q29" value="C"> C) Carbon</label>
+                    <label><input type="radio" name="q29" value="D"> D) Nitrogen</label>
+                </div>
+            </div>
+            
+            <div class="question" id="question30">
+                <p>30. Who was the first president of the United States?</p>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="A"> A) Thomas Jefferson</label>
+                    <label><input type="radio" name="q30" value="B"> B) Abraham Lincoln</label>
+                    <label><input type="radio" name="q30" value="C"> C) George Washington</label>
+                    <label><input type="radio" name="q30" value="D"> D) John Adams</label>
+                </div>
+            </div>
+
+
+            <button type="button" class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        </form>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+    <div class="footer">
+        <p>ออกแบบโดย [ชื่อของคุณ]</p>
+    </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAyY7wg4CJvlzq-V04n-lMWxBiLkL9E374",
-            authDomain: "natural-aspect-355112.firebaseapp.com",
-            databaseURL: "https://natural-aspect-355112-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "natural-aspect-355112",
-            storageBucket: "natural-aspect-355112.firebasestorage.app",
-            messagingSenderId: "941925591339",
-            appId: "1:941925591339:web:366d6757801abb11fbfd6e"
+    <script>
+        // Answer key for questions
+        const answers = {
+            q1: "B", // Apple
+            q2: "C", // Carrot
+            q3: "C", // Jupiter
+            q4: "A", // William Shakespeare
+            q5: "B", // Paris
+            q6: "C", // H2O
+            q7: "A", // Washington, D.C.
+            q8: "C", // 1945
+            q9: "C", // Albert Einstein
+            q10: "C", // Python
+            q11: "A", // Leonardo da Vinci
+            q12: "C", // Beethoven
+            q13: "C", // Sahara Desert
+            q14: "B", // Nile River
+            q15: "A", // Mount Everest
+            q16: "C", // Elon Musk
+            q17: "C", // Leonardo da Vinci
+            q18: "A", // 1776
+            q19: "A", // 1912
+            q20: "D",  // California
+            q21: "A",
+            q22: "A",
+            q23: "A",
+            q24: "B",
+            q25: "B",
+            q26: "B",
+            q27: "A",
+            q28: "B",
+            q29: "B",
+            q30: "C"
+
+
         };
 
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const vocabRef = ref(database, 'vocabulary');
+        function submitQuiz() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
 
-        let vocabData = [];
-
-        // Function to shuffle an array (Fisher-Yates Shuffle)
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+            // Loop through each question and check the answer
+            for (let question in answers) {
+                const userAnswer = form.querySelector(`input[name="${question}"]:checked`);
+                if (userAnswer && userAnswer.value === answers[question]) {
+                    score++;
+                }
             }
-        }
 
-        // Fetch data from Firebase
-        get(vocabRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                vocabData = Object.keys(snapshot.val()).map(key => {
-                    return { word: key, meaning: snapshot.val()[key].meaning };
-                });
-
-                // Shuffle the data to make it random
-                shuffle(vocabData);
-
-                // Display the total count
-                document.getElementById("total-count").innerText = `Total Vocabulary Items: ${vocabData.length}`;
-
-                // Display the vocabulary list
-                displayVocabulary();
-            } else {
-                console.log("No data available");
-            }
-        }).catch((error) => {
-            console.error("Error fetching data: ", error);
-        });
-
-        // Display all vocabulary data in order
-        function displayVocabulary() {
-            const vocabListElement = document.getElementById("vocabulary-list");
-
-            // Empty the list first before displaying new data
-            vocabListElement.innerHTML = '';
-
-            // Loop through vocabData and display with index
-            vocabData.forEach((item, index) => {
-                const listItem = document.createElement("li");
-                listItem.classList.add("vocabulary-item");
-                listItem.innerHTML = `
-                    <h3>${index + 1}. ${item.word}</h3>
-                    <p><strong>Meaning:</strong> ${item.meaning}</p>
-                `;
-                vocabListElement.appendChild(listItem);
-            });
+            alert(`คุณได้คะแนน ${score} จาก 30`);
         }
     </script>
 
