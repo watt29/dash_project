@@ -1897,7 +1897,7 @@
                 const form = document.getElementById('quizForm');
 
                 // Loop through each question (1 to 70)
-                for (let i = 1; i <= 120; i++) {
+                for (let i = 1; i <= 160; i++) {
                     const question = `q${i}`;
                     const userAnswer = form.querySelector(`input[name="${question}"]:checked`);
                     if (userAnswer && userAnswer.value === answers[question]) {
@@ -1905,7 +1905,7 @@
                     }
                 }
 
-                alert(`คุณได้คะแนน ${score} จาก 120 คะแนน`);
+                alert(`คุณได้คะแนน ${score} จาก 160 คะแนน`);
             }
     </script>
 </body>
